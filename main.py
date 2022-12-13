@@ -1,14 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
+url = 'https://ycharts.com/indicators/bitcoin_average_difficulty'
+headers = {'User-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0'}
 
-r = requests.get('https://www.washingtonpost.com/books/2022/12/08/best-mystery-novels-2022/')
+r = requests.get(url, headers=headers)
 
 print(r)
 print(r.status_code)
 
 soup = BeautifulSoup(r.content, 'html.parser')
-divs = soup.find('article', class_='grid-article mb-xxl-ns')
-lines = divs.find_all('p')
-for div in divs:
-    for line in lines:
-        print(line.text)
+divs = soup.find('div', class_='key-stat-title')
+
+print(divs.text)
